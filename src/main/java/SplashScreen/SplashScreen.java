@@ -5,6 +5,8 @@
  */
 package SplashScreen;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author benndip
@@ -27,40 +29,58 @@ public class SplashScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        Background = new javax.swing.JPanel();
+        loadingBar = new javax.swing.JProgressBar();
+        loadingValue = new javax.swing.JLabel();
+        loadingState = new javax.swing.JLabel();
+        background_image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(900, 500));
+        setResizable(false);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(900, 500));
+        Background.setBackground(new java.awt.Color(170, 186, 187));
+        Background.setAlignmentX(400.0F);
+        Background.setAlignmentY(400.0F);
+        Background.setMinimumSize(new java.awt.Dimension(1000, 900));
+        Background.setPreferredSize(new java.awt.Dimension(900, 500));
+        Background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Background.add(loadingBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 473, 400, 10));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+        loadingValue.setForeground(new java.awt.Color(254, 254, 254));
+        loadingValue.setText("0 %");
+        Background.add(loadingValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 470, -1, -1));
+
+        loadingState.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        loadingState.setForeground(new java.awt.Color(254, 254, 254));
+        loadingState.setText("Loading ...");
+        Background.add(loadingState, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 210, 30));
+
+        background_image.setIcon(new javax.swing.ImageIcon("/home/benndip/Downloads/Background_image.png")); // NOI18N
+        background_image.setText("jLabel1");
+        background_image.setPreferredSize(new java.awt.Dimension(900, 500));
+        Background.add(background_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -96,9 +116,46 @@ public class SplashScreen extends javax.swing.JFrame {
                 new SplashScreen().setVisible(true);
             }
         });
+        
+        SplashScreen sp = new SplashScreen();
+        sp.setVisible(true);
+        
+        try {
+            for(int i = 0; i<=100; i++){
+                Thread.sleep(200);
+                sp.loadingValue.setText(i +"%");
+                if(i==10){
+                    sp.loadingState.setText("Turning on Modules...");
+                }
+                 if(i==20){
+                    sp.loadingState.setText("Loading on Modules...");
+                }
+                 if(i==50){
+                    sp.loadingState.setText("Connecting to Database...");
+                }
+                 if(i==70){
+                    sp.loadingState.setText("Connection successful !");
+                }
+                 if(i==70){
+                    sp.loadingState.setText("Connection successful !");
+                }
+                 if(i==80){
+                    sp.loadingState.setText("Launching Application");
+                }
+                 
+                 sp.loadingBar.setValue(i);
+                 sp.loadingBar.setVisible(true);
+            }
+        } catch (InterruptedException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel Background;
+    private javax.swing.JLabel background_image;
+    private javax.swing.JProgressBar loadingBar;
+    private javax.swing.JLabel loadingState;
+    private javax.swing.JLabel loadingValue;
     // End of variables declaration//GEN-END:variables
 }

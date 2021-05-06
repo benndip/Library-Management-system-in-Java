@@ -33,10 +33,10 @@ public class DatabaseConnection {
          
         try {
             DriverManager.getConnection(url, user, password);
-            JOptionPane.showMessageDialog(null, "connected");
+            System.out.println("Connection successful");
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Failed to connect");
+            System.out.println("Connection successful");
         }
         return connection;
     }
