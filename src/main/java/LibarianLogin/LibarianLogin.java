@@ -28,6 +28,10 @@ public class LibarianLogin extends javax.swing.JFrame {
     DatabaseConnection conn;
     public LibarianLogin() {
         initComponents();
+         conn = new DatabaseConnection();
+        if(conn == null){
+            JOptionPane.showMessageDialog(this, "Database Not available", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -76,7 +80,7 @@ public class LibarianLogin extends javax.swing.JFrame {
         if(libarianName.isEmpty() || libarianPassword.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in both Name and Password", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
-            adminLogin(libarianName, libarianPassword);
+            libarianLogin(libarianName, libarianPassword);
         }
         
     }//GEN-LAST:event_loginBtnActionPerformed
@@ -123,16 +127,16 @@ public class LibarianLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField password;
     // End of variables declaration//GEN-END:variables
     
-    public void adminLogin(String libarianName, String libarianPassword){
+    private void libarianLogin(String libarianName, String libarianPassword){
         Connection dbconn = conn.dbConnection();
         if(dbconn != null){
-            try {
-            PreparedStatement st = (PreparedStatement)
-                    dbconn.prepareStatement("SELECT * FROM administrators WHERE name=? AND password =?;");
+            try{
+                PreparedStatement st = (PreparedStatement)
+                    dbconn.prepareStatement("SELECT * FROM libarians WHERE name=? AND password =?;");
             st.setString(1, libarianName);
             st.setString(2, libarianPassword);
             ResultSet res = st.executeQuery();
-            if(res.next()){
+                if(res.next()){
                 this.dispose();
                 LibarianSection libarianSection = new LibarianSection();
                 libarianSection.setVisible(true);
@@ -140,12 +144,11 @@ public class LibarianLogin extends javax.swing.JFrame {
                 libarianSection.setLocationRelativeTo(null);
                 libarianSection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(LibarianLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (SQLException ex){
+                Logger.getLogger(LibarianLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
             System.out.println("no connection");
         }
     }
-
 }

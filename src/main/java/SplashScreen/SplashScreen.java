@@ -147,8 +147,9 @@ public class SplashScreen extends javax.swing.JFrame {
                      LibraryManagement libraryManangement = new LibraryManagement();
                      libraryManangement.setVisible(true);
                      libraryManangement.pack();
-                     //libraryManangement.setLocationRelativeTo(null);
+                     libraryManangement.setLocationRelativeTo(null);
                      libraryManangement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                     sp.setVisible(false);
                      sp.dispose();
                  }
                  
