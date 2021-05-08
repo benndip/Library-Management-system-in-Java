@@ -5,6 +5,8 @@
  */
 package SplashScreen;
 
+import LibraryManagement.LibraryManagement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,7 +40,6 @@ public class SplashScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(900, 500));
         setResizable(false);
 
@@ -142,6 +143,14 @@ public class SplashScreen extends javax.swing.JFrame {
                  if(i==80){
                     sp.loadingState.setText("Launching Application");
                 }
+                 if(i==100){
+                     LibraryManagement libraryManangement = new LibraryManagement();
+                     libraryManangement.setVisible(true);
+                     libraryManangement.pack();
+                     //libraryManangement.setLocationRelativeTo(null);
+                     libraryManangement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                     sp.dispose();
+                 }
                  
                  sp.loadingBar.setValue(i);
                  sp.loadingBar.setVisible(true);

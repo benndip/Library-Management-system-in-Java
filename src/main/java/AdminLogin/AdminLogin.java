@@ -5,6 +5,17 @@
  */
 package AdminLogin;
 
+import AminSection.AdminSection;
+import com.mycompany.librarymanagement.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author benndip
@@ -14,8 +25,13 @@ public class AdminLogin extends javax.swing.JFrame {
     /**
      * Creates new form AdminLogin
      */
+    DatabaseConnection conn;
     public AdminLogin() {
         initComponents();
+        conn = new DatabaseConnection();
+        if(conn == null){
+            JOptionPane.showMessageDialog(this, "Database Not available", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -27,26 +43,32 @@ public class AdminLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        loginBtn = new javax.swing.JButton();
+        name = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
         Background_image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(157, 0, 255));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 3, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(254, 254, 254));
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.setBackground(new java.awt.Color(157, 0, 255));
+        loginBtn.setFont(new java.awt.Font("Ubuntu", 3, 18)); // NOI18N
+        loginBtn.setForeground(new java.awt.Color(254, 254, 254));
+        loginBtn.setText("Login");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 200, 50));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 230, 40));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 300, 230, 40));
+        getContentPane().add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 200, 50));
+
+        name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 230, 40));
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 300, 230, 40));
 
         Background_image.setIcon(new javax.swing.ImageIcon("/home/benndip/NetBeansProjects/LibraryManagement/src/main/java/AdminLogin/AdminLogin_background.png")); // NOI18N
         Background_image.setText("jLabel1");
@@ -56,9 +78,20 @@ public class AdminLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String adminName = name.getText();
+        String adminPassword = password.getText();
+        if(adminName.isEmpty() || adminPassword.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in both Name and Password", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            adminLogin(adminName, adminPassword);
+        }
+    }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,8 +130,33 @@ public class AdminLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background_image;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JTextField name;
+    private javax.swing.JPasswordField password;
     // End of variables declaration//GEN-END:variables
+
+    private void adminLogin(String adminName, String adminPassword) {
+        Connection dbconn = conn.dbConnection();
+        if(dbconn != null){
+            try {
+            PreparedStatement st = (PreparedStatement)
+                    dbconn.prepareStatement("SELECT * FROM administrators WHERE name=? AND password =?;");
+            st.setString(1, adminName);
+            st.setString(2, adminPassword);
+            ResultSet res = st.executeQuery();
+            if(res.next()){
+                this.dispose();
+                AdminSection adminSection = new AdminSection();
+                adminSection.setVisible(true);
+                adminSection.pack();
+                adminSection.setLocationRelativeTo(null);
+                adminSection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }else{
+            System.out.println("no connection");
+        }
+    }
 }

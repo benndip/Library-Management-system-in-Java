@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,29 +20,29 @@ public class DatabaseConnection {
     Connection connection;
     String url = "jdbc:postgresql://localhost:5432/postgres";
     String user = "postgres";
-    String password = "";
+    String password = "postgres";
     
     public Connection dbConnection(){
         
         try {
-                Class.forName("org.postgresql.Driver");
+            Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException ex) {
-                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
         try {
-            DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(url, user, password);
             System.out.println("Connection successful");
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Connection successful");
-        }
+        }   
         return connection;
     }
     
     public static void main(String[] args){
         DatabaseConnection db = new DatabaseConnection();
-        db.dbConnection();
+         Connection please = db.dbConnection();
+         System.out.println(please);
     }
     
 }

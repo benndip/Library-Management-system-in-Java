@@ -5,6 +5,17 @@
  */
 package LibarianLogin;
 
+import LibarianSection.LibarianSection;
+import com.mycompany.librarymanagement.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author benndip
@@ -14,6 +25,7 @@ public class LibarianLogin extends javax.swing.JFrame {
     /**
      * Creates new form LibarianLogin
      */
+    DatabaseConnection conn;
     public LibarianLogin() {
         initComponents();
     }
@@ -28,8 +40,8 @@ public class LibarianLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         name = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        password = new javax.swing.JPasswordField();
+        loginBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,16 +50,16 @@ public class LibarianLogin extends javax.swing.JFrame {
         getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, 190, -1));
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, 190, -1));
 
-        jButton1.setBackground(new java.awt.Color(125, 6, 245));
-        jButton1.setFont(new java.awt.Font("Ubuntu", 3, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 250, 250));
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.setBackground(new java.awt.Color(125, 6, 245));
+        loginBtn.setFont(new java.awt.Font("Ubuntu", 3, 12)); // NOI18N
+        loginBtn.setForeground(new java.awt.Color(255, 250, 250));
+        loginBtn.setText("Login");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 160, 40));
+        getContentPane().add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 160, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/benndip/NetBeansProjects/LibraryManagement/src/main/java/LibarianLogin/LibarianLogin_background.png")); // NOI18N
         jLabel1.setText("jLabel1");
@@ -57,9 +69,17 @@ public class LibarianLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String libarianName = name.getText();
+        String libarianPassword = password.getText();
+        if(libarianName.isEmpty() || libarianPassword.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in both Name and Password", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            adminLogin(libarianName, libarianPassword);
+        }
+        
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,9 +117,35 @@ public class LibarianLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton loginBtn;
     private javax.swing.JTextField name;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
     // End of variables declaration//GEN-END:variables
+    
+    public void adminLogin(String libarianName, String libarianPassword){
+        Connection dbconn = conn.dbConnection();
+        if(dbconn != null){
+            try {
+            PreparedStatement st = (PreparedStatement)
+                    dbconn.prepareStatement("SELECT * FROM administrators WHERE name=? AND password =?;");
+            st.setString(1, libarianName);
+            st.setString(2, libarianPassword);
+            ResultSet res = st.executeQuery();
+            if(res.next()){
+                this.dispose();
+                LibarianSection libarianSection = new LibarianSection();
+                libarianSection.setVisible(true);
+                libarianSection.pack();
+                libarianSection.setLocationRelativeTo(null);
+                libarianSection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LibarianLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }else{
+            System.out.println("no connection");
+        }
+    }
+
 }

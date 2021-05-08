@@ -5,6 +5,10 @@
  */
 package LibraryManagement;
 
+import AdminLogin.AdminLogin;
+import LibarianLogin.LibarianLogin;
+import javax.swing.JFrame;
+
 /**
  *
  * @author benndip
@@ -47,6 +51,11 @@ public class LibraryManagement extends javax.swing.JFrame {
 
         libarianLoginBtn.setFont(new java.awt.Font("Open Sans", 3, 15)); // NOI18N
         libarianLoginBtn.setText("Libarian Login");
+        libarianLoginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                libarianLoginBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(libarianLoginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 270, 70));
 
         Background_image.setIcon(new javax.swing.ImageIcon("/home/benndip/NetBeansProjects/LibraryManagement/src/main/java/LibraryManagement/LibraryManagement_background.png")); // NOI18N
@@ -60,7 +69,24 @@ public class LibraryManagement extends javax.swing.JFrame {
 
     private void adminLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLoginBtnActionPerformed
         // TODO add your handling code here:
+        AdminLogin adminLogin = new AdminLogin();
+        adminLogin.setVisible(true);
+        adminLogin.pack();
+        adminLogin.setLocationRelativeTo(null);
+        adminLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_adminLoginBtnActionPerformed
+
+    private void libarianLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libarianLoginBtnActionPerformed
+        // TODO add your handling code here:
+        LibarianLogin libarianLogin = new LibarianLogin();
+        libarianLogin.setVisible(true);
+        libarianLogin.pack();
+        libarianLogin.setLocationRelativeTo(null);
+        libarianLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+        
+    }//GEN-LAST:event_libarianLoginBtnActionPerformed
 
     /**
      * @param args the command line arguments
