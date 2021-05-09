@@ -5,6 +5,20 @@
  */
 package IssueBook;
 
+import LibarianSection.LibarianSection;
+import com.mycompany.librarymanagement.DatabaseConnection;
+import static java.lang.Integer.parseInt;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author benndip
@@ -14,8 +28,13 @@ public class IssueBook extends javax.swing.JFrame {
     /**
      * Creates new form IssueBook
      */
+    DatabaseConnection conn;
     public IssueBook() {
         initComponents();
+         conn = new DatabaseConnection();
+        if(conn == null){
+            JOptionPane.showMessageDialog(this, "Database Not available", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -67,6 +86,16 @@ public class IssueBook extends javax.swing.JFrame {
 
     private void issueBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_issueBookBtnActionPerformed
         // TODO add your handling code here:
+        String booknallno = bookCallNo.getText();
+        int studentid = parseInt(studentId.getText());
+        String studentname = studentName.getText();
+        String studentcontact = studentContact.getText();
+        Date currentDate = Date.valueOf(LocalDate.now());
+        if(booknallno.isEmpty()||studentname.isEmpty() || studentcontact.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            issueBoook(booknallno, studentid, studentname, studentcontact, currentDate);
+        }
     }//GEN-LAST:event_issueBookBtnActionPerformed
 
     /**
@@ -113,4 +142,32 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JTextField studentId;
     private javax.swing.JTextField studentName;
     // End of variables declaration//GEN-END:variables
+    
+    private void issueBoook(String booknallno, int studentid,String studentname, String studentcontact, Date currentDate ){
+         Connection dbconn = conn.dbConnection();
+        if(dbconn != null){
+            try {
+            PreparedStatement st = (PreparedStatement)
+                    dbconn.prepareStatement("INSERT INTO issued_books (book_call_no,student_id,student_name,student_contact,issueddate) VALUES (?,?,?,?,?);");
+            st.setString(1, booknallno);
+            st.setInt(2, studentid);
+            st.setString(3, studentname);
+            st.setString(4, studentcontact);
+            st.setDate(5, currentDate);
+                int res = st.executeUpdate();
+            if(res > 0){
+                this.setVisible(false);
+                LibarianSection libarianSection = new LibarianSection();
+                libarianSection.setVisible(true);
+                libarianSection.pack();
+                libarianSection.setLocationRelativeTo(null);
+                libarianSection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IssueBook.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }else{
+            System.out.println("no connection");
+        }
+    }
 }
