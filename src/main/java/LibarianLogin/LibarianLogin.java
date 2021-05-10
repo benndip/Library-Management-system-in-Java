@@ -63,7 +63,7 @@ public class LibarianLogin extends javax.swing.JFrame {
                 loginBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 160, 40));
+        getContentPane().add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 140, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/benndip/NetBeansProjects/LibraryManagement/src/main/java/LibarianLogin/LibarianLogin_background.png")); // NOI18N
         jLabel1.setText("jLabel1");

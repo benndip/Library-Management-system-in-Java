@@ -5,6 +5,12 @@
  */
 package LibarianSection;
 
+import AddBook.AddBook;
+import IssueBook.IssueBook;
+import LibraryManagement.LibraryManagement;
+import ReturnBook.ReturnBook;
+import javax.swing.JFrame;
+
 /**
  *
  * @author benndip
@@ -51,6 +57,11 @@ public class LibarianSection extends javax.swing.JFrame {
         getContentPane().add(viewBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 180, 40));
 
         issueBookBtn.setText("Issue Book");
+        issueBookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                issueBookBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(issueBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 180, 40));
 
         viewIssuedBooksBtn.setText("View Issued Books");
@@ -62,9 +73,19 @@ public class LibarianSection extends javax.swing.JFrame {
         getContentPane().add(viewIssuedBooksBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 180, 40));
 
         returnBookBtn.setText("Return Book");
+        returnBookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBookBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(returnBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 180, 40));
 
         logoutBtn.setText("Logout");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 180, 40));
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 3, 36)); // NOI18N
@@ -76,15 +97,53 @@ public class LibarianSection extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookBtnActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        AddBook addBook = new AddBook();
+        addBook.setVisible(true);
+        addBook.pack();
+        addBook.setLocationRelativeTo(null);
+        addBook.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_addBookBtnActionPerformed
 
     private void viewIssuedBooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewIssuedBooksBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewIssuedBooksBtnActionPerformed
+
+    private void issueBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_issueBookBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        IssueBook issueBook = new IssueBook();
+        issueBook.setVisible(true);
+        issueBook.pack();
+        issueBook.setLocationRelativeTo(null);
+        issueBook.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+    }//GEN-LAST:event_issueBookBtnActionPerformed
+
+    private void returnBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBookBtnActionPerformed
+        // TODO add your handling code here:
+         this.setVisible(false);
+         ReturnBook returnBook = new ReturnBook();
+         returnBook.setVisible(true);
+         returnBook.pack();
+         returnBook.setLocationRelativeTo(null);
+         returnBook.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }//GEN-LAST:event_returnBookBtnActionPerformed
+
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        LibraryManagement libraryManagement = new LibraryManagement();
+        libraryManagement.setVisible(true);
+        libraryManagement.pack();
+        libraryManagement.setLocationRelativeTo(null);
+        libraryManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }//GEN-LAST:event_logoutBtnActionPerformed
 
     /**
      * @param args the command line arguments

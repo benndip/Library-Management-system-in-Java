@@ -143,25 +143,24 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JTextField studentName;
     // End of variables declaration//GEN-END:variables
     
-    private void issueBoook(String booknallno, int studentid,String studentname, String studentcontact, Date currentDate ){
+    private void issueBoook(String bookcallno, int studentid,String studentname, String studentcontact, Date currentDate ){
          Connection dbconn = conn.dbConnection();
         if(dbconn != null){
             try {
             PreparedStatement st = (PreparedStatement)
                     dbconn.prepareStatement("INSERT INTO issued_books (book_call_no,student_id,student_name,student_contact,issueddate) VALUES (?,?,?,?,?);");
-            st.setString(1, booknallno);
+            st.setString(1, bookcallno);
             st.setInt(2, studentid);
             st.setString(3, studentname);
             st.setString(4, studentcontact);
             st.setDate(5, currentDate);
                 int res = st.executeUpdate();
             if(res > 0){
-                this.setVisible(false);
-                LibarianSection libarianSection = new LibarianSection();
-                libarianSection.setVisible(true);
-                libarianSection.pack();
-                libarianSection.setLocationRelativeTo(null);
-                libarianSection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                JOptionPane.showMessageDialog(this, "Book with id: " + bookcallno + " issued successfully to " + studentname + " !");
+                bookCallNo.setText(null);
+                studentContact.setText(null);
+                studentId.setText(null);
+                studentName.setText(null);
             }
         } catch (SQLException ex) {
             Logger.getLogger(IssueBook.class.getName()).log(Level.SEVERE, null, ex);

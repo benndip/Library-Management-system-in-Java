@@ -41,8 +41,8 @@ public class ReturnBook extends javax.swing.JFrame {
         checkBookProperlyTxt.setForeground(new java.awt.Color(255, 0, 0));
         checkBookProperlyTxt.setText("Check Book  Properly !");
         getContentPane().add(checkBookProperlyTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 370, -1, 30));
-        getContentPane().add(bookCallNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, 190, -1));
-        getContentPane().add(studentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 190, -1));
+        getContentPane().add(bookCallNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, 210, 50));
+        getContentPane().add(studentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 210, 50));
 
         returnBookBtn.setBackground(new java.awt.Color(173, 0, 255));
         returnBookBtn.setForeground(new java.awt.Color(254, 254, 254));

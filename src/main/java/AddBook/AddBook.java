@@ -5,6 +5,14 @@
  */
 package AddBook;
 
+import com.mycompany.librarymanagement.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author benndip
@@ -14,8 +22,13 @@ public class AddBook extends javax.swing.JFrame {
     /**
      * Creates new form AddBook
      */
+    DatabaseConnection conn;
     public AddBook() {
         initComponents();
+         conn = new DatabaseConnection();
+        if(conn == null){
+            JOptionPane.showMessageDialog(this, "Database Not available", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -27,36 +40,39 @@ public class AddBook extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        callno = new javax.swing.JTextField();
+        name = new javax.swing.JTextField();
+        author = new javax.swing.JTextField();
+        publisher = new javax.swing.JTextField();
+        quantity = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 180, -1));
+        getContentPane().add(callno, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 200, 50));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                nameActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, 180, -1));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 180, -1));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 180, -1));
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 180, -1));
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, 200, 50));
+        getContentPane().add(author, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 200, 50));
+        getContentPane().add(publisher, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 200, 50));
+        getContentPane().add(quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 320, 200, 50));
 
+        addBtn.setBackground(new java.awt.Color(185, 1, 254));
+        addBtn.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        addBtn.setForeground(new java.awt.Color(254, 254, 254));
         addBtn.setText("ADD");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, 210, 70));
+        getContentPane().add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 430, 140, 50));
 
         backBtn.setText("Back");
         getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 440, 60, -1));
@@ -66,16 +82,56 @@ public class AddBook extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_nameActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
+        String bcallno = callno.getText();
+        String bname = name.getText();
+        String bauthor = author.getText();
+        String bpublisher = publisher.getText();
+        int bquantity = Integer.parseInt(quantity.getText());
+        Date currentDate = Date.valueOf(LocalDate.now());
+        
+        int status = addbooks(bcallno, bname, bauthor, bpublisher, bquantity, currentDate);
+        
+        if(status>0){
+            JOptionPane.showMessageDialog(this, "Book added successfully!");
+            callno.setText(null);
+            name.setText(null);
+            author.setText(null);
+            publisher.setText(null);
+            quantity.setText(null);
+	}else{
+            JOptionPane.showMessageDialog(this,"Sorry, unable to add books!");
+	}        
     }//GEN-LAST:event_addBtnActionPerformed
-
+    
+     public int addbooks(String callno, String name, String author, String publisher, Integer quantity, Date currentDate){
+        int status = 0;
+        try {
+            Connection dbconn = conn.dbConnection();
+            PreparedStatement ps = (PreparedStatement)
+                    dbconn.prepareStatement("INSERT INTO books (callno, name, author, publisher, quantity, added_date) values (?,?,?,?,?,?)");
+            ps.setString(1, callno);
+            ps.setString(2, name);
+            ps.setString(3, author);
+            ps.setString(4, publisher);
+            ps.setInt(5, quantity);
+            ps.setDate(6, currentDate);
+            
+            status = ps.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+        return status;
+    }
+     
     /**
      * @param args the command line arguments
      */
@@ -113,12 +169,12 @@ public class AddBook extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JTextField author;
     private javax.swing.JButton backBtn;
+    private javax.swing.JTextField callno;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField name;
+    private javax.swing.JTextField publisher;
+    private javax.swing.JTextField quantity;
     // End of variables declaration//GEN-END:variables
 }
