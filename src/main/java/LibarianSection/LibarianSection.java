@@ -10,6 +10,7 @@ import IssueBook.IssueBook;
 import LibraryManagement.LibraryManagement;
 import ReturnBook.ReturnBook;
 import ViewBooks.ViewBooks;
+import ViewIssuedBooks.ViewIssuedBooks;
 import javax.swing.JFrame;
 
 /**
@@ -118,6 +119,13 @@ public class LibarianSection extends javax.swing.JFrame {
 
     private void viewIssuedBooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewIssuedBooksBtnActionPerformed
         // TODO add your handling code here:
+         this.setVisible(false);
+        ViewIssuedBooks viewIssuedBooks = new ViewIssuedBooks();
+        viewIssuedBooks.setVisible(true);
+        viewIssuedBooks.pack();
+        viewIssuedBooks.setLocationRelativeTo(null);
+        viewIssuedBooks.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
     }//GEN-LAST:event_viewIssuedBooksBtnActionPerformed
 
     private void issueBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_issueBookBtnActionPerformed
