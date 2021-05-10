@@ -9,6 +9,7 @@ import AddBook.AddBook;
 import IssueBook.IssueBook;
 import LibraryManagement.LibraryManagement;
 import ReturnBook.ReturnBook;
+import ViewBooks.ViewBooks;
 import javax.swing.JFrame;
 
 /**
@@ -54,6 +55,11 @@ public class LibarianSection extends javax.swing.JFrame {
         getContentPane().add(addBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 180, 40));
 
         viewBookBtn.setText("View Books");
+        viewBookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewBookBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(viewBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 180, 40));
 
         issueBookBtn.setText("Issue Book");
@@ -144,6 +150,16 @@ public class LibarianSection extends javax.swing.JFrame {
         libraryManagement.setLocationRelativeTo(null);
         libraryManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_logoutBtnActionPerformed
+
+    private void viewBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBookBtnActionPerformed
+        // TODO add your handling code here:
+        ViewBooks viewBooks = new ViewBooks();
+        this.dispose();
+        viewBooks.setVisible(true);
+        viewBooks.pack();
+        viewBooks.setLocationRelativeTo(null);
+        viewBooks.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }//GEN-LAST:event_viewBookBtnActionPerformed
 
     /**
      * @param args the command line arguments
