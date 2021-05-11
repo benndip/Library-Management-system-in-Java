@@ -5,6 +5,9 @@
  */
 package AminSection;
 
+import LibraryManagement.LibraryManagement;
+import javax.swing.JFrame;
+
 /**
  *
  * @author benndip
@@ -48,6 +51,11 @@ public class AdminSection extends javax.swing.JFrame {
         getContentPane().add(deleteLibarianBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 240, 50));
 
         logoutTxt.setText("Logout");
+        logoutTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutTxtActionPerformed(evt);
+            }
+        });
         getContentPane().add(logoutTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 240, 50));
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 3, 36)); // NOI18N
@@ -61,6 +69,16 @@ public class AdminSection extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutTxtActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        LibraryManagement libraryManagement = new LibraryManagement();
+        libraryManagement.setVisible(true);
+        libraryManagement.pack();
+        libraryManagement.setLocationRelativeTo(null);
+        libraryManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }//GEN-LAST:event_logoutTxtActionPerformed
 
     /**
      * @param args the command line arguments
