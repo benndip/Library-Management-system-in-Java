@@ -5,6 +5,11 @@
  */
 package DeleteLibarian;
 
+import com.mycompany.librarymanagement.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author benndip
@@ -14,8 +19,13 @@ public class DeleteLibarian extends javax.swing.JFrame {
     /**
      * Creates new form DeleteLibarian
      */
+    DatabaseConnection conn;
     public DeleteLibarian() {
         initComponents();
+        conn = new DatabaseConnection();
+        if(conn == null){
+            JOptionPane.showMessageDialog(this, "Database Not available", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -28,8 +38,8 @@ public class DeleteLibarian extends javax.swing.JFrame {
     private void initComponents() {
 
         libarianId = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,19 +52,19 @@ public class DeleteLibarian extends javax.swing.JFrame {
         });
         getContentPane().add(libarianId, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, 120, -1));
 
-        jButton1.setText("Back");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
+        backBtn.setText("Back");
+        getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(146, 14, 254));
-        jButton2.setFont(new java.awt.Font("Ubuntu", 3, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(254, 254, 254));
-        jButton2.setText("Delete");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Delete.setBackground(new java.awt.Color(146, 14, 254));
+        Delete.setFont(new java.awt.Font("Ubuntu", 3, 12)); // NOI18N
+        Delete.setForeground(new java.awt.Color(254, 254, 254));
+        Delete.setText("Delete");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                DeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 390, 170, 40));
+        getContentPane().add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 390, 170, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/benndip/NetBeansProjects/LibraryManagement/src/main/java/DeleteLibarian/DeleteLibarian_background.png")); // NOI18N
         jLabel1.setText("jLabel1");
@@ -68,10 +78,38 @@ public class DeleteLibarian extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_libarianIdActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        String sid=libarianId.getText();
+	if(sid == null || sid.trim().equals("")){
+            JOptionPane.showMessageDialog(this,"Id can't be blank");
+	}
+        else{
+            int lid = Integer.parseInt(sid);
+            int status = delete(lid);
+            if(status > 0){
+                JOptionPane.showMessageDialog(this,"Librarian deleted successfully!");
+                libarianId.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"No librarian with given id found");
+            }
+	}
+    }//GEN-LAST:event_DeleteActionPerformed
 
+    public int delete(int id){
+		int status=0;
+		try{
+			Connection dbconn = conn.dbConnection();
+			PreparedStatement ps=dbconn.prepareStatement("delete from libarians where id=?");
+			ps.setInt(1,id);
+			status = ps.executeUpdate();
+			dbconn.close();
+		}
+                catch(Exception e)
+                    {System.out.println(e);}
+		return status;
+	}
     /**
      * @param args the command line arguments
      */
@@ -108,8 +146,8 @@ public class DeleteLibarian extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Delete;
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField libarianId;
     // End of variables declaration//GEN-END:variables
