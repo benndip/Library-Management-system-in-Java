@@ -96,7 +96,7 @@ public class AddBook extends javax.swing.JFrame {
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-        String bcallno = callno.getText();
+        int bcallno = Integer.parseInt(callno.getText());
         String bname = name.getText();
         String bauthor = author.getText();
         String bpublisher = publisher.getText();
@@ -122,13 +122,13 @@ public class AddBook extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
     
-     public int addbooks(String callno, String name, String author, String publisher, Integer quantity, Date currentDate){
+     public int addbooks(Integer callno, String name, String author, String publisher, Integer quantity, Date currentDate){
         int status = 0;
         try {
             Connection dbconn = conn.dbConnection();
             PreparedStatement ps = (PreparedStatement)
                     dbconn.prepareStatement("INSERT INTO books (callno, name, author, publisher, quantity, added_date) values (?,?,?,?,?,?)");
-            ps.setString(1, callno);
+            ps.setInt(1, callno);
             ps.setString(2, name);
             ps.setString(3, author);
             ps.setString(4, publisher);

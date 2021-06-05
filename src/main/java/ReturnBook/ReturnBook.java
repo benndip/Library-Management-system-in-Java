@@ -6,10 +6,9 @@
 package ReturnBook;
 
 import com.mycompany.librarymanagement.DatabaseConnection;
+import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -83,20 +82,27 @@ public class ReturnBook extends javax.swing.JFrame {
 
     private void returnBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBookBtnActionPerformed
         // TODO add your handling code here:
-          String rbbookcallno = bookCallNo.getText();
-        int rbstudentid = Integer.parseInt(studentId.getText());
+        int bookcallno = Integer.parseInt(bookCallNo.getText());
+        int studentid = Integer.parseInt(studentId.getText());
         
-        int status = returnbook(rbbookcallno, rbstudentid);
-        if(status>0){
-            updatebook(rbbookcallno);
-            JOptionPane.showMessageDialog(this, "Book returned sucessfully. Thanks!");
-            bookCallNo.setText("");
-            studentId.setText("");
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Not possible cuz this book has been returned already");
-            bookCallNo.setText("");
-            studentId.setText("");
+        int status = 0;    
+        try {
+           Connection dbconn = conn.dbConnection();
+            PreparedStatement ps = (PreparedStatement)
+                    dbconn.prepareStatement("delete from issued_books where book_call_no=? and student_id=? ");
+            ps.setInt(1, bookcallno);
+            ps.setInt(2, studentid);
+            status = ps.executeUpdate();
+            if(status > 0){
+                JOptionPane.showMessageDialog(this, "Book with id: " + bookcallno + " returned successfully to " + " !");
+                bookCallNo.setText(null);
+                studentId.setText(null);
+            }else{
+              JOptionPane.showMessageDialog(this, "Failed to return book");
+            }
+            System.out.println("delete tried with status" + status);
+        } catch (Exception e) {
+            
         }
     }//GEN-LAST:event_returnBookBtnActionPerformed
 
@@ -105,50 +111,7 @@ public class ReturnBook extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
-    public int returnbook(String bcallno, int studentid){
-        int status = 0;    
-        try {
-            Connection dbconn = conn.dbConnection();
-            PreparedStatement ps = dbconn.prepareStatement("delete from issued_books where book_call_no=? and student_id=? ");
-            ps.setString(1, bcallno);
-            ps.setInt(2, studentid);
-            status = ps.executeUpdate();
-            updatebook(bcallno);
-            System.out.println("delete tried with status" + status);
-            dbconn.close();
-        } catch (Exception e) {
-        }
-        return status;
-   }
     
-   public int updatebook(String bcallno){
-        int status = 0;
-        int quantity = 0;
-        int issued = 0;
-        try {
-            Connection dbconn = conn.dbConnection();
-            PreparedStatement ps = dbconn.prepareStatement("select quantity, issued from books where callno=?");
-            ps.setString(1,bcallno);
-            ResultSet rs = ps.executeQuery();
-            
-            if(rs.next()){
-		quantity = rs.getInt("quantity");
-		issued = rs.getInt("issued");
-		}
-            if(issued > 0){
-                PreparedStatement ps1 = dbconn.prepareStatement("update books set quantity=?, issued=? where callno=? ");
-                ps1.setInt(1, quantity++);
-                ps1.setInt(2, issued--);
-                ps1.setString(3, bcallno);
-                status = ps1.executeUpdate();
-            }
-            
-            System.out.println("update tried with status" + status);
-            dbconn.close();
-        } catch (Exception e) {
-        }
-        return status;
-   }
     /**
      * @param args the command line arguments
      */

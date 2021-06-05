@@ -91,12 +91,12 @@ public class IssueBook extends javax.swing.JFrame {
 
     private void issueBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_issueBookBtnActionPerformed
         // TODO add your handling code here:
-        String booknallno = bookCallNo.getText();
+        int booknallno = Integer.parseInt(bookCallNo.getText());
         int studentid = parseInt(studentId.getText());
         String studentname = studentName.getText();
         String studentcontact = studentContact.getText();
         Date currentDate = Date.valueOf(LocalDate.now());
-        if(booknallno.isEmpty()||studentname.isEmpty() || studentcontact.isEmpty()){
+        if(studentname.isEmpty()|| studentcontact.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             issueBoook(booknallno, studentid, studentname, studentcontact, currentDate);
@@ -153,13 +153,13 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JTextField studentName;
     // End of variables declaration//GEN-END:variables
     
-    private void issueBoook(String bookcallno, int studentid,String studentname, String studentcontact, Date currentDate ){
+    private void issueBoook(Integer bookcallno, int studentid,String studentname, String studentcontact, Date currentDate ){
          Connection dbconn = conn.dbConnection();
         if(dbconn != null){
             try {
             PreparedStatement st = (PreparedStatement)
                     dbconn.prepareStatement("INSERT INTO issued_books (book_call_no,student_id,student_name,student_contact,issueddate) VALUES (?,?,?,?,?);");
-            st.setString(1, bookcallno);
+            st.setInt(1, bookcallno);
             st.setInt(2, studentid);
             st.setString(3, studentname);
             st.setString(4, studentcontact);
