@@ -109,7 +109,6 @@ public class LibarianSection extends javax.swing.JFrame {
 
     private void addBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookBtnActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
         AddBook addBook = new AddBook();
         addBook.setVisible(true);
         addBook.pack();
@@ -119,7 +118,6 @@ public class LibarianSection extends javax.swing.JFrame {
 
     private void viewIssuedBooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewIssuedBooksBtnActionPerformed
         // TODO add your handling code here:
-         this.setVisible(false);
         ViewIssuedBooks viewIssuedBooks = new ViewIssuedBooks();
         viewIssuedBooks.setVisible(true);
         viewIssuedBooks.pack();
@@ -130,7 +128,6 @@ public class LibarianSection extends javax.swing.JFrame {
 
     private void issueBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_issueBookBtnActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
         IssueBook issueBook = new IssueBook();
         issueBook.setVisible(true);
         issueBook.pack();
@@ -141,7 +138,6 @@ public class LibarianSection extends javax.swing.JFrame {
 
     private void returnBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBookBtnActionPerformed
         // TODO add your handling code here:
-         this.setVisible(false);
          ReturnBook returnBook = new ReturnBook();
          returnBook.setVisible(true);
          returnBook.pack();
@@ -151,7 +147,7 @@ public class LibarianSection extends javax.swing.JFrame {
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose();
         LibraryManagement libraryManagement = new LibraryManagement();
         libraryManagement.setVisible(true);
         libraryManagement.pack();
@@ -162,7 +158,6 @@ public class LibarianSection extends javax.swing.JFrame {
     private void viewBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBookBtnActionPerformed
         // TODO add your handling code here:
         ViewBooks viewBooks = new ViewBooks();
-        this.dispose();
         viewBooks.setVisible(true);
         viewBooks.pack();
         viewBooks.setLocationRelativeTo(null);

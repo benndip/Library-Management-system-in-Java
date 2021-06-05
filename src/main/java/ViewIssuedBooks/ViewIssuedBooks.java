@@ -118,12 +118,6 @@ public class ViewIssuedBooks extends javax.swing.JFrame {
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        this.setVisible(false);
-        LibarianSection libarianSection = new LibarianSection();
-        libarianSection.setVisible(true);
-        libarianSection.pack();
-        libarianSection.setLocationRelativeTo(null);
-        libarianSection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_BackBtnActionPerformed
 
     /**

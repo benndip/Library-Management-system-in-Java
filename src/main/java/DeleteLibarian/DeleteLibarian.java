@@ -53,6 +53,11 @@ public class DeleteLibarian extends javax.swing.JFrame {
         getContentPane().add(libarianId, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, 120, -1));
 
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
 
         Delete.setBackground(new java.awt.Color(146, 14, 254));
@@ -96,6 +101,11 @@ public class DeleteLibarian extends javax.swing.JFrame {
             }
 	}
     }//GEN-LAST:event_DeleteActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     public int delete(int id){
 		int status=0;

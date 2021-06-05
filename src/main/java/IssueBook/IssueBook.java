@@ -70,6 +70,11 @@ public class IssueBook extends javax.swing.JFrame {
         getContentPane().add(issueBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, 210, 60));
 
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 450, -1, -1));
         getContentPane().add(bookCallNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 170, -1));
         getContentPane().add(studentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 170, -1));
@@ -97,6 +102,11 @@ public class IssueBook extends javax.swing.JFrame {
             issueBoook(booknallno, studentid, studentname, studentcontact, currentDate);
         }
     }//GEN-LAST:event_issueBookBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments

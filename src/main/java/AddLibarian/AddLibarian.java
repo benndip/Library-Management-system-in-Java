@@ -5,6 +5,7 @@
  */
 package AddLibarian;
 
+import LibarianSection.LibarianSection;
 import com.mycompany.librarymanagement.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -85,6 +86,9 @@ public class AddLibarian extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
+//        LibarianSection libarianSection;
+            this.dispose();
+        
     }//GEN-LAST:event_backActionPerformed
 
     private void addLibarianBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLibarianBtnActionPerformed

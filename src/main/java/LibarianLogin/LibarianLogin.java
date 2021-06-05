@@ -46,6 +46,7 @@ public class LibarianLogin extends javax.swing.JFrame {
         name = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
         loginBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,6 +65,14 @@ public class LibarianLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 140, 40));
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/benndip/NetBeansProjects/LibraryManagement/src/main/java/LibarianLogin/LibarianLogin_background.png")); // NOI18N
         jLabel1.setText("jLabel1");
@@ -84,6 +93,11 @@ public class LibarianLogin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,6 +135,7 @@ public class LibarianLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginBtn;
     private javax.swing.JTextField name;

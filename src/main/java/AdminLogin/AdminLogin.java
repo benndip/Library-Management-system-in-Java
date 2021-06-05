@@ -46,6 +46,7 @@ public class AdminLogin extends javax.swing.JFrame {
         loginBtn = new javax.swing.JButton();
         name = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
         Background_image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,6 +71,14 @@ public class AdminLogin extends javax.swing.JFrame {
         getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 230, 40));
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 300, 230, 40));
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, -1, -1));
+
         Background_image.setIcon(new javax.swing.ImageIcon("/home/benndip/NetBeansProjects/LibraryManagement/src/main/java/AdminLogin/AdminLogin_background.png")); // NOI18N
         Background_image.setText("jLabel1");
         getContentPane().add(Background_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
@@ -92,6 +101,11 @@ public class AdminLogin extends javax.swing.JFrame {
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,6 +144,7 @@ public class AdminLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background_image;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton loginBtn;
     private javax.swing.JTextField name;
     private javax.swing.JPasswordField password;

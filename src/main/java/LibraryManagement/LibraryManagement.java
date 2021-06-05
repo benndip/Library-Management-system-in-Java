@@ -74,7 +74,6 @@ public class LibraryManagement extends javax.swing.JFrame {
         adminLogin.pack();
         adminLogin.setLocationRelativeTo(null);
         adminLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
     }//GEN-LAST:event_adminLoginBtnActionPerformed
 
     private void libarianLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libarianLoginBtnActionPerformed
@@ -83,9 +82,7 @@ public class LibraryManagement extends javax.swing.JFrame {
         libarianLogin.setVisible(true);
         libarianLogin.pack();
         libarianLogin.setLocationRelativeTo(null);
-        libarianLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-        
+        libarianLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
     }//GEN-LAST:event_libarianLoginBtnActionPerformed
 
     /**

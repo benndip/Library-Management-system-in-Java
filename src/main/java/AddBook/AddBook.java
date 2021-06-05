@@ -75,6 +75,11 @@ public class AddBook extends javax.swing.JFrame {
         getContentPane().add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 430, 140, 50));
 
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 440, 60, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/benndip/NetBeansProjects/LibraryManagement/src/main/java/AddBook/AddBook_background.png")); // NOI18N
@@ -111,6 +116,11 @@ public class AddBook extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Sorry, unable to add books!");
 	}        
     }//GEN-LAST:event_addBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
     
      public int addbooks(String callno, String name, String author, String publisher, Integer quantity, Date currentDate){
         int status = 0;

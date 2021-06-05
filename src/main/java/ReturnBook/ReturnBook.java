@@ -66,6 +66,11 @@ public class ReturnBook extends javax.swing.JFrame {
         getContentPane().add(returnBookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 220, 60));
 
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 440, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/benndip/NetBeansProjects/LibraryManagement/src/main/java/ReturnBook/ReturnBook_background.png")); // NOI18N
@@ -94,6 +99,11 @@ public class ReturnBook extends javax.swing.JFrame {
             studentId.setText("");
         }
     }//GEN-LAST:event_returnBookBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     public int returnbook(String bcallno, int studentid){
         int status = 0;    

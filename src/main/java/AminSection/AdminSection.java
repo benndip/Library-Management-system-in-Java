@@ -6,6 +6,9 @@
 package AminSection;
 
 import LibraryManagement.LibraryManagement;
+import AddLibarian.AddLibarian;
+import DeleteLibarian.DeleteLibarian;
+import ViewLibarians.ViewLibarians;
 import javax.swing.JFrame;
 
 /**
@@ -42,12 +45,27 @@ public class AdminSection extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addLibarianBtn.setText("Add Libarian");
+        addLibarianBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addLibarianBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(addLibarianBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 240, 50));
 
         viewLibarianBtn.setText("View Libarian");
+        viewLibarianBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewLibarianBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(viewLibarianBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 240, 50));
 
         deleteLibarianBtn.setText("Delete Libarian");
+        deleteLibarianBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteLibarianBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(deleteLibarianBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 240, 50));
 
         logoutTxt.setText("Logout");
@@ -79,6 +97,33 @@ public class AdminSection extends javax.swing.JFrame {
         libraryManagement.setLocationRelativeTo(null);
         libraryManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_logoutTxtActionPerformed
+
+    private void addLibarianBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLibarianBtnActionPerformed
+        // TODO add your this.setVisible(false);
+        AddLibarian addLibarianManagement = new AddLibarian();
+        addLibarianManagement.setVisible(true);
+        addLibarianManagement.pack();
+        addLibarianManagement.setLocationRelativeTo(null);
+        addLibarianManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }//GEN-LAST:event_addLibarianBtnActionPerformed
+
+    private void viewLibarianBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLibarianBtnActionPerformed
+        // TODO add your handling code here:
+        ViewLibarians viewLibarians = new ViewLibarians();
+        viewLibarians.setVisible(true);
+        viewLibarians.pack();
+        viewLibarians.setLocationRelativeTo(null);
+        viewLibarians.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }//GEN-LAST:event_viewLibarianBtnActionPerformed
+
+    private void deleteLibarianBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLibarianBtnActionPerformed
+        // TODO add your handling code here:
+        DeleteLibarian deleteLibarian = new DeleteLibarian();
+        deleteLibarian.setVisible(true);
+        deleteLibarian.pack();
+        deleteLibarian.setLocationRelativeTo(null);
+        deleteLibarian.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }//GEN-LAST:event_deleteLibarianBtnActionPerformed
 
     /**
      * @param args the command line arguments
